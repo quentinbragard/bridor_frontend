@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge.jsx'
 import { Alert, AlertDescription } from '@/components/ui/alert.jsx'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.jsx'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
-import { TrendingUp, Brain, BarChart3, Settings, AlertCircle, CheckCircle, Clock } from 'lucide-react'
+import { TrendingUp, Brain, BarChart3, Settings, AlertCircle, CheckCircle, Clock, ArrowRight } from 'lucide-react'
 import './App.css'
 
 // Import analysis images
@@ -23,9 +23,10 @@ function App() {
   const [startDate, setStartDate] = useState('2025-01-01')
   const [periods, setPeriods] = useState('12')
   const [error, setError] = useState(null)
+  const [entered, setEntered] = useState(false)
 
   // API base URL - adjust this based on your backend
-  const API_BASE = 'http://localhost:5001/api'
+  const API_BASE = 'https://bridor-backend-32108269805.europe-west9.run.app/api'
 
   useEffect(() => {
     checkModelStatus()
@@ -108,16 +109,75 @@ function App() {
     }
   }
 
+  const Landing = () => (
+    <div
+      className="min-h-screen relative overflow-hidden bg-gradient-to-b from-white via-blue-50 to-indigo-100 cursor-pointer"
+      onClick={() => setEntered(true)}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setEntered(true) }}
+      role="button"
+      tabIndex={0}
+    >
+      {/* Animated decorative blobs */}
+      <div className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full bg-blue-400/50 blur-3xl animate-blob" />
+      <div className="pointer-events-none absolute -bottom-20 -right-20 h-96 w-96 rounded-full bg-indigo-400/40 blur-3xl animate-blob animation-delay-2000" />
+      <div className="pointer-events-none absolute top-1/3 -right-10 h-72 w-72 rounded-full bg-blue-300/40 blur-3xl animate-blob animation-delay-4000" />
+
+      {/* Centered logos only */}
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-16">
+        {/* Glow behind logos */}
+        <div className="logo-glow animate-pulse-glow" />
+        <div className="flex items-center justify-center gap-6 sm:gap-8 md:gap-10 animate-reveal animate-float-lg select-none">
+          <img src="/jaydai_logo.png" alt="Jaydai" className="h-28 sm:h-36 md:h-48 lg:h-[14rem] w-auto object-contain drop-shadow" />
+          <span className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-gray-400">×</span>
+          <img src="/bridor_logo.png" alt="Bridor" className="h-24 sm:h-32 md:h-44 lg:h-[12rem] w-auto object-contain drop-shadow" />
+        </div>
+
+        {/* Explicit CTA button */}
+        <div className="mt-10 animate-reveal" onClick={(e) => e.stopPropagation()}>
+          <Button
+            onClick={() => setEntered(true)}
+            size="lg"
+            className="group h-12 px-7 text-base sm:text-lg shadow-xl rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-500 hover:to-indigo-500 transition-transform duration-300 hover:scale-[1.03]"
+          >
+            <span className="mr-2">Enter Demo</span>
+            <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="max-w-7xl mx-auto">
+        {!entered ? (
+          <Landing />
+        ) : (
+        <>
+        {/* Brand Bar */}
+        <div className="sticky top-3 z-20 mb-6">
+          <div className="mx-auto w-full rounded-xl border border-white/60 bg-white/70 backdrop-blur-md shadow-sm px-4 py-3">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <img src="/jaydai_logo.png" alt="Jaydai logo" className="h-9 sm:h-10 w-auto object-contain" />
+                <span className="text-gray-400">×</span>
+                <img src="/bridor_logo.png" alt="Bridor logo" className="h-8 sm:h-9 w-auto object-contain" />
+              </div>
+              <div className="hidden sm:flex items-center gap-2 text-xs text-gray-600">
+                <Badge className="bg-gray-900 text-white">Collaboration</Badge>
+                <span className="hidden md:inline">AI‑powered sales forecasting</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-2">
             <TrendingUp className="w-8 h-8 text-blue-600" />
-            Sales Forecasting Dashboard
+            Jaydai × Bridor Sales Forecasting
           </h1>
-          <p className="text-lg text-gray-600">Advanced machine learning model for weekly sales predictions</p>
+          <p className="text-lg text-gray-600">Accurate weekly projections to guide production and demand planning</p>
         </div>
 
         {/* Error Alert */}
@@ -422,6 +482,17 @@ function App() {
             </Card>
           </TabsContent>
         </Tabs>
+        {/* Footer */}
+        <div className="mt-10 flex flex-col items-center justify-center gap-2 text-sm text-gray-500">
+          <div className="flex items-center gap-2">
+            <img src="/jaydai_logo.png" alt="Jaydai" className="h-5" />
+            <span>×</span>
+            <img src="/bridor_logo.png" alt="Bridor" className="h-5" />
+          </div>
+          <p className="text-xs">Prototype dashboard — for demonstration purposes</p>
+        </div>
+        </>
+        )}
       </div>
     </div>
   )
