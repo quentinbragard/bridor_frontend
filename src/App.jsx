@@ -191,10 +191,10 @@ export default function App() {
       {/* Hero section */}
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-16">
         <div className="animate-float-lg flex flex-col items-center text-center max-w-4xl">
-          <div className="flex items-center justify-center gap-6 sm:gap-8 md:gap-10 mb-4">
-            <img src="/jaydai_logo.png" alt="Jaydai" className="h-28 sm:h-36 md:h-40 w-auto object-contain drop-shadow-lg" />
-            <span className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-indigo-200 font-light">×</span>
-            <img src="/bridor_logo.png" alt="Bridor" className="h-24 sm:h-32 md:h-36 w-auto object-contain drop-shadow-lg" />
+          <div className="flex items-center justify-center gap-3 sm:gap-8 md:gap-10 mb-4">
+            <img src="/jaydai_logo.png" alt="Jaydai" className="h-16 sm:h-24 md:h-32 w-auto object-contain drop-shadow-lg" />
+            <span className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl text-indigo-200 font-light">×</span>
+            <img src="/bridor_logo.png" alt="Bridor" className="h-14 sm:h-20 md:h-28 w-auto object-contain drop-shadow-lg" />
           </div>
           
           <motion.div
