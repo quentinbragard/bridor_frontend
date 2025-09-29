@@ -200,6 +200,15 @@
   background-image: linear-gradient(to right, #3b82f6 0%, #4f46e5 50%, #3b82f6 100%);
 }
 
+.app-shell {
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(160deg, #eff6ff 0%, #eef2ff 45%, #ffffff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .btn-gradient:hover {
   background-position: right center;
 }
