@@ -25,7 +25,7 @@ import { Input } from './ui/input'
 import { Label } from './ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 
-const API_BASE = 'http://localhost:5002/api/forecasting'
+const API_BASE = 'https://bridor-backend-32108269805.europe-west9.run.app/api/forecasting'
 
 const ForecastingDashboard = () => {
   const [models, setModels] = useState([])
